@@ -1,11 +1,7 @@
-from datetime import datetime
-
-from django import http
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect, render
-from django.template.response import TemplateResponse
-from django.urls import reverse_lazy, reverse
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 from .forms import SchedulerForm, SchedulerListForm
 from .models import Scheduler

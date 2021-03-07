@@ -1,4 +1,3 @@
-import os
 import requests
 from .models import Scheduler
 
@@ -14,6 +13,6 @@ def schedule(*args):
     json = _get_request_json(url)
     if json == 200:
         try:
-            Scheduler.objects.filter(pk=pk).update(status='Completed')
+            Scheduler.objects.filter(pk=pk).update(status='Completed', result=json)
         except:
             pass

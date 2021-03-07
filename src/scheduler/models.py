@@ -14,3 +14,4 @@ class Scheduler(models.Model):
     url = models.CharField(max_length=255)
     date = models.DateTimeField()
     status = models.CharField(max_length=50, choices=STATUS, default='Pending')
+    result = models.CharField(max_length=50, blank=True)
