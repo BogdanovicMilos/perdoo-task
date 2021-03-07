@@ -1,1 +1,1 @@
-web: gunicorn perdoo_task.wsgi
+web: sh -c 'cd ./src/ && exec gunicorn perdoo_task.wsgi:application'
