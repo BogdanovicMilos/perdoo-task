@@ -1,0 +1,1 @@
+web: gunicorn perdoo_task.wsgi
