@@ -35,7 +35,7 @@ class SchedulerListView(TemplateView):
     form_class = SchedulerListForm
 
     def get(self, request, *args, **kwargs):
-        requests = Scheduler.objects.all()
+        requests = Scheduler.objects.filter(pk=self.request.user)
         if requests:
             return render(request, 'scheduler/schedule_list.html', {'requests': requests})
         return super().get(request, *args, **kwargs)
