@@ -1,0 +1,51 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+    {% if request.user.is_authenticated %}
+        <form method="post" style="position: relative; justify-content: left; text-align: center; margin-top: 100px">
+
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button class="btn btn-success">{% trans 'Create' %}</button>
+
+        </form>
+    {% else %}
+
+
+    {% endif %}
+
+{% endblock %}
+
+
+<!--<div class="panel panel-primary" >-->
+<!--              <div class="panel-heading">Schedule an Request</div>-->
+<!--              <div class="panel-body">-->
+<!--                 <div class="col-md-6">-->
+<!--                     <form>-->
+<!--                        <div class="form-group">-->
+<!--                            <input type="text" class="form-control" name="url" id="url" placeholder="url">-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <div class='input-group date' id='datetimepicker1'>-->
+<!--                                <input type='text' class="form-control" />-->
+<!--                                <span class="input-group-addon">-->
+<!--                                <span class="glyphicon glyphicon-calendar"></span>-->
+<!--                                </span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <script type="text/javascript">-->
+<!--                            $(function () {-->
+<!--                                $('#datetimepicker1').datetimepicker();-->
+<!--                            });-->
+<!--                        </script>-->
+<!--                      <input type="submit" class="btn btn-primary" value="Submit">-->
+<!--                    </form>-->
+<!--                 </div>-->
+<!--              </div>-->
+<!--           </div>-->

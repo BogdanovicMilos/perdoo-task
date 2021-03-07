@@ -1,0 +1,45 @@
+from datetime import datetime
+
+from django import http
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template.response import TemplateResponse
+from django.urls import reverse_lazy, reverse
+from django.views.generic import FormView, TemplateView
+from .forms import SchedulerForm, SchedulerListForm
+from .models import Scheduler
+from apscheduler.schedulers.background import BackgroundScheduler
+from .scheduler import schedule
+
+
+class SchedulerView(FormView):
+    template_name = 'scheduler/schedule.html'
+    form_class = SchedulerForm
+
+    def form_valid(self, form):
+        if self.request.method == 'POST':
+            form = SchedulerForm(self.request.POST)
+            if form.is_valid():
+                form_obj = form.save(commit=False)
+                form_obj.user = self.request.user
+                form_obj.save()
+                scheduler = BackgroundScheduler()
+                date = str(form.cleaned_data['date'])[:19]
+                scheduler.add_job(schedule, 'date', run_date=date, args=[form.cleaned_data, form_obj.pk])
+                scheduler.start()
+                messages.success(self.request, 'Request submitted successfully')
+                return HttpResponseRedirect(reverse_lazy('scheduler:schedule'))
+            messages.error(self.request, 'Something was wrong')
+            return HttpResponseRedirect(reverse_lazy('scheduler:schedule'))
+
+
+class SchedulerListView(TemplateView):
+    template_name = 'scheduler/schedule_list.html'
+    form_class = SchedulerListForm
+
+    def get(self, request, *args, **kwargs):
+        requests = Scheduler.objects.all()
+        if requests:
+            return render(request, 'scheduler/schedule_list.html', {'requests': requests})
+        return super().get(request, *args, **kwargs)

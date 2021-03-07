@@ -1,0 +1,35 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+
+    {% if request.user.is_authenticated %}
+        <table class="table table-bordered" style="width: 1100px;">
+            <tr>
+              <th style="width: 200px;">USER</th>
+              <th style="width: 300px;">DATE</th>
+              <th style="width: 800px;">URL</th>
+              <th style="width: 50px;">STATUS</th>
+            </tr>
+            {% for data in requests %}
+                <tr>
+                    <th style="font-weight: normal"> {{ data.user }} </th>
+                    <th style="font-weight: normal"> {{ data.date }} </th>
+                    <th style="font-weight: normal"> {{ data.url }} </th>
+                    {% if data.status == 'Pending' %}
+                        <th style="color: gold"> {{ data.status }} </th>
+                    {% else %}
+                        <th style="color: LimeGreen"> {{ data.status }} </th>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% else %}
+
+
+    {% endif %}
+
+{% endblock %}
