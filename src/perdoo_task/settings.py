@@ -28,7 +28,7 @@ SECRET_KEY = '5zn-ea1x7k)bs=%xoc)d3xyp7%^)i5h^cy8o!44r3m+b56!1kq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['perdoo-task.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'perdoo-task.herokuapp.com']
 
 
 # Application definition
@@ -144,7 +144,7 @@ if DISABLE_USERNAME:
     SIGN_UP_FIELDS = ['first_name', 'last_name', 'email', 'password1', 'password2']
 
 
-STATIC_ROOT = os.path.join(CONTENT_DIR, 'static')
+STATIC_ROOT = os.path.join(CONTENT_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(CONTENT_DIR, 'media')
