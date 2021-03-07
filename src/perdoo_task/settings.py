@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import django_heroku
 from pathlib import Path
+from django.contrib import messages
 from os.path import dirname
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -131,7 +132,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 ENABLE_USER_ACTIVATION = True
-DISABLE_USERNAME = False
+DISABLE_USERNAME = True
 LOGIN_VIA_EMAIL = True
 LOGIN_VIA_EMAIL_OR_USERNAME = False
 LOGIN_REDIRECT_URL = 'scheduler:schedule'
@@ -158,5 +159,10 @@ STATICFILES_DIRS = [
 LOCALE_PATHS = [
     os.path.join(CONTENT_DIR, 'locale')
 ]
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
+
 
 django_heroku.settings(locals())

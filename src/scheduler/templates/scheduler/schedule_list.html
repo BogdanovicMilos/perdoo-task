@@ -6,30 +6,9 @@
 {% block content %}
 
     {% if request.user.is_authenticated %}
-<!--        <table class="table table-bordered" style="width: 1100px;">-->
-<!--            <tr>-->
-<!--              <th style="width: 200px;">USER</th>-->
-<!--              <th style="width: 300px;">DATE</th>-->
-<!--              <th style="width: 800px;">URL</th>-->
-<!--              <th style="width: 50px;">STATUS</th>-->
-<!--            </tr>-->
-<!--            {% for data in requests %}-->
-<!--                <tr>-->
-<!--                    <th style="font-weight: normal"> {{ data.user }} </th>-->
-<!--                    <th style="font-weight: normal"> {{ data.date }} </th>-->
-<!--                    <th style="font-weight: normal"> {{ data.url }} </th>-->
-<!--                    {% if data.status == 'Pending' %}-->
-<!--                        <th style="color: gold"> {{ data.status }} </th>-->
-<!--                    {% else %}-->
-<!--                        <th style="color: LimeGreen"> {{ data.status }} </th>-->
-<!--                    {% endif %}-->
-<!--                </tr>-->
-<!--            {% endfor %}-->
-<!--        </table>-->
-
         <div class="row">
             <div class="col-md-5">
-                <h5>PENDING REQUESTS</h5>
+                <h6>PENDING REQUESTS</h6>
                 <hr>
                 <div class="card card-body">
                     <table class="table table-sm">
@@ -39,7 +18,6 @@
                             <th>URL</th>
                             <th>STATUS</th>
                         </tr>
-
                         {% for data in requests %}
                             {% if data.status == 'Pending' %}
                                 <tr>
@@ -52,13 +30,12 @@
                                 </tr>
                             {% endif %}
                         {% endfor %}
-
                     </table>
                 </div>
             </div>
 
             <div class="col-md-7">
-                <h5>EXECUTED</h5>
+                <h6>EXECUTED REQUESTS</h6>
                 <hr>
                 <div class="card card-body">
                     <table class="table table-sm">
@@ -74,23 +51,18 @@
                             {% if data.status == 'Completed' %}
                                 <tr>
                                     <td>{{ data.id }}</td>
-                                    <td>{{ data.user }}</td>
-                                    <td style="position: relative; width: 500px;">{{data.url}}</td>
+                                    <td>{{ data.user.first_name }} {{ data.user.last_name }}</td>
+                                    <td style="position: relative; width: 350px;">{{data.url}}</td>
                                     <td style="position: relative; width: 150px;">{{data.result}}</td>
                                     <td style="color: LimeGreen">{{ data.status }}</td>
                                 </tr>
                             {% endif %}
                         {% endfor %}
-
-
                     </table>
                 </div>
             </div>
-
         </div>
-
     {% else %}
-
 
     {% endif %}
 

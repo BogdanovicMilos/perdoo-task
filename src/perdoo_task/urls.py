@@ -23,7 +23,7 @@ from users.views import IndexPageView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
-    path('scheduler/', include('scheduler.urls')),
+    path('schedule/', include('scheduler.urls')),
     path('', IndexPageView.as_view(), name='index'),
 ]
 

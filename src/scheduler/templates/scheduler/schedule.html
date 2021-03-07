@@ -7,45 +7,23 @@
 {% block content %}
 
     {% if request.user.is_authenticated %}
-        <form method="post" style="position: relative; justify-content: left; text-align: center; margin-top: 100px">
-
-            {% csrf_token %}
-            {{ form.as_p }}
-
-            <button class="btn btn-success">{% trans 'Create' %}</button>
-
-        </form>
+            <h4 style="position: relative; text-align: center; margin-top: 100px">{% trans 'Schedule a request' %}</h4>
+            <div style="width: 500px; position: relative; justify-content: left; text-align: left; margin: auto; margin-top: 50px">
+                <form method="post">
+                    {% csrf_token %}
+                    <label class="form-label">URL</label>
+                    <div class="mb-3">
+                        {{ form.url }}
+                    </div>
+                    <label class="form-label">Date & Time</label>
+                    <div class="mb-3">
+                        {{ form.date }}
+                    </div>
+                    <button class="btn btn-success">{% trans 'Create' %}</button>
+                </form>
+            </div>
     {% else %}
-
 
     {% endif %}
 
 {% endblock %}
-
-
-<!--<div class="panel panel-primary" >-->
-<!--              <div class="panel-heading">Schedule an Request</div>-->
-<!--              <div class="panel-body">-->
-<!--                 <div class="col-md-6">-->
-<!--                     <form>-->
-<!--                        <div class="form-group">-->
-<!--                            <input type="text" class="form-control" name="url" id="url" placeholder="url">-->
-<!--                        </div>-->
-<!--                        <div class="form-group">-->
-<!--                            <div class='input-group date' id='datetimepicker1'>-->
-<!--                                <input type='text' class="form-control" />-->
-<!--                                <span class="input-group-addon">-->
-<!--                                <span class="glyphicon glyphicon-calendar"></span>-->
-<!--                                </span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <script type="text/javascript">-->
-<!--                            $(function () {-->
-<!--                                $('#datetimepicker1').datetimepicker();-->
-<!--                            });-->
-<!--                        </script>-->
-<!--                      <input type="submit" class="btn btn-primary" value="Submit">-->
-<!--                    </form>-->
-<!--                 </div>-->
-<!--              </div>-->
-<!--           </div>-->

@@ -47,7 +47,6 @@ class LogInView(GuestOnlyView, FormView):
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
     def dispatch(self, request, *args, **kwargs):
-        # Sets a test cookie to make sure the user has cookies enabled
         request.session.set_test_cookie()
 
         return super().dispatch(request, *args, **kwargs)
@@ -55,12 +54,9 @@ class LogInView(GuestOnlyView, FormView):
     def form_valid(self, form):
         request = self.request
 
-        # If the test cookie worked, go ahead and delete it since its no longer needed
         if request.session.test_cookie_worked():
             request.session.delete_test_cookie()
 
-        # The default Django's "remember me" lifetime is 2 weeks and can be changed by modifying
-        # the SESSION_COOKIE_AGE settings' option.
         if settings.USE_REMEMBER_ME:
             if not form.cleaned_data['remember_me']:
                 request.session.set_expiry(0)
@@ -85,40 +81,19 @@ class SignUpView(GuestOnlyView, FormView):
         user = form.save(commit=False)
 
         if settings.DISABLE_USERNAME:
-            # Set a temporary username
             user.username = get_random_string()
         else:
             user.username = form.cleaned_data['username']
 
         if settings.ENABLE_USER_ACTIVATION:
             user.is_active = True
-        # Create a user record
         user.save()
 
-        # Change the username to the "user_ID" form
         if settings.DISABLE_USERNAME:
             user.username = f'user_{user.id}'
             user.save()
 
-        # if settings.ENABLE_USER_ACTIVATION:
-        #     code = get_random_string(20)
-
-            # act = Activation()
-            # act.code = code
-            # act.user = user
-            # act.save()
-            #
-            # send_activation_email(request, user.email, code)
-
         messages.success(request, _('Your account has been created! You are now able to log in.'))
-        # else:
-        #     raw_password = form.cleaned_data['password1']
-        #
-        #     user = authenticate(username=user.username, password=raw_password)
-        #     login(request, user)
-        #
-        #     messages.success(request, _('You are successfully signed up!'))
-
         return redirect('users:log_in')
 
 

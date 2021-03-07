@@ -15,18 +15,15 @@ class SchedulerForm(ModelForm):
 
     class Meta:
         model = Scheduler
-        fields = ['url', 'date']
+        fields = ('url', 'date',)
         widgets = {
-            'date': DateTimeInput(),
+            'url': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'input URL'}),
+            'date': DateTimeInput(attrs={'class': 'form-control'}),
         }
-        # widgets = {
-        #     'url': forms.TextInput(attrs={'class': 'input', 'placeholder': 'url'}),
-        #     'date': DateTimeInput(),
-        # }
 
 
 class SchedulerListForm(ModelForm):
 
     class Meta:
         model = Scheduler
-        fields = ['url', 'date', 'status']
+        fields = ('url', 'date', 'status',)
