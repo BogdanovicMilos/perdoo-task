@@ -28,7 +28,7 @@ SECRET_KEY = '5zn-ea1x7k)bs=%xoc)d3xyp7%^)i5h^cy8o!44r3m+b56!1kq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['perdoo-task.herokuapp.com']
 
 
 # Application definition
