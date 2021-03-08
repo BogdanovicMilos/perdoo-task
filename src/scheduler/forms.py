@@ -17,8 +17,8 @@ class SchedulerForm(ModelForm):
         model = Scheduler
         fields = ('url', 'date',)
         widgets = {
-            'url': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'input URL'}),
-            'date': DateTimeInput(attrs={'class': 'form-control'}),
+            'url': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'input url', 'style': 'font-style: italic'}),
+            'date': DateTimeInput(attrs={'class': 'form-control', 'style': 'font-style: italic'}),
         }
 
 
